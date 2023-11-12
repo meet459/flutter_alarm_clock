@@ -14,6 +14,13 @@ class _ClockPageState extends State<ClockPage> {
   @override
   Widget build(BuildContext context) {
     var now = DateTime.now();
+    var startOfDay = DateTime(now.year, now.month, now.day);
+    var secondsSinceStartOfDay = now.difference(startOfDay).inSeconds;
+    int speedTimeSeconds = (secondsSinceStartOfDay * 0.041666).round();
+    Duration speedTime = Duration(seconds: speedTimeSeconds);
+    now = now.add(speedTime);
+    print('--------> TIME');
+    print(now);
 
     var formattedDate = DateFormat('EEE, d MMM').format(now);
     var timezoneString = now.timeZoneOffset.toString().split('.').first;
